@@ -4,8 +4,8 @@ class MyApp extends StatefulWidget {
   //named constructor
   const MyApp._internal();
 
-  static final MyApp _instance =
-      const MyApp._internal(); //singleton or singel instance
+  static const MyApp _instance =
+      MyApp._internal(); //singleton or singel instance
 
   factory MyApp() => _instance; //factory
 
