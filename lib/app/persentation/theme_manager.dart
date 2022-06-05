@@ -23,6 +23,7 @@ ThemeData getApplicationTheme() {
     ),
 
     //appBar theme
+
     appBarTheme: AppBarTheme(
       centerTitle: true,
       color: ColorManager.primary,
@@ -34,6 +35,7 @@ ThemeData getApplicationTheme() {
       ),
     ),
     //Button theme
+
     buttonTheme: ButtonThemeData(
       shape: const StadiumBorder(),
       disabledColor: ColorManager.grey1,
@@ -65,5 +67,40 @@ ThemeData getApplicationTheme() {
     ),
 
     //input decoration theme (text form field)
+
+    inputDecorationTheme: InputDecorationTheme(
+      //content padding
+      contentPadding: const EdgeInsets.all(AppPadding.p8),
+      //hint style
+      hintStyle:
+          getRegularStyle(color: ColorManager.grey, fontSize: FontSize.s14),
+      //lable
+      labelStyle:
+          getMediumStyle(color: ColorManager.grey, fontSize: FontSize.s14),
+      //error style
+      errorStyle: getRegularStyle(color: ColorManager.error),
+      //Enabled border style
+      enabledBorder: OutlineInputBorder(
+        borderSide:
+            BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
+        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
+      ),
+      //focused border
+      focusedBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: ColorManager.grey, width: AppSize.s1_5),
+        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
+      ),
+      //erorr border style
+      errorBorder: OutlineInputBorder(
+        borderSide: BorderSide(color: ColorManager.error, width: AppSize.s1_5),
+        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
+      ),
+      //focused border style
+      focusedErrorBorder: OutlineInputBorder(
+        borderSide:
+            BorderSide(color: ColorManager.primary, width: AppSize.s1_5),
+        borderRadius: const BorderRadius.all(Radius.circular(AppSize.s8)),
+      ),
+    ),
   );
 }
