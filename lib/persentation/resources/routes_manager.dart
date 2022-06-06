@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_app/persentation/on_boarding/on_boarding.dart';
+import 'package:flutter_advanced_app/persentation/on_boarding/view/on_boarding_view.dart';
 
 import '../forget_password/forget_password.dart';
 import '../login/login_view.dart';
