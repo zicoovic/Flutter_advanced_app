@@ -1,5 +1,7 @@
+// ignore_for_file: constant_identifier_names
+
 import 'package:dio/dio.dart';
-import 'package:flutter_advanced_app/data/network/failure.dart';
+import '/data/network/failure.dart';
 
 class ErrorHandler implements Exception {
   late Failure failure;

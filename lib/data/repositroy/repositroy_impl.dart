@@ -1,12 +1,12 @@
-import 'package:flutter_advanced_app/data/data_source/remote_data_source.dart';
-import 'package:flutter_advanced_app/data/mapper/mapper.dart';
-import 'package:flutter_advanced_app/data/network/error_handler.dart';
-import 'package:flutter_advanced_app/data/network/network_info.dart';
-import 'package:flutter_advanced_app/domain/model/models.dart';
-import 'package:flutter_advanced_app/data/network/requests.dart';
-import 'package:flutter_advanced_app/data/network/failure.dart';
+import '/data/data_source/remote_data_source.dart';
+import '/data/mapper/mapper.dart';
+import '/data/network/error_handler.dart';
+import '/data/network/network_info.dart';
+import '/domain/model/models.dart';
+import '/data/network/requests.dart';
+import '/data/network/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_advanced_app/domain/repositroy/repository.dart';
+import '/domain/repositroy/repository.dart';
 
 class RepositroyImpl implements Repositry {
   final RemoteDataSource _remoteDataSource;

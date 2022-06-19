@@ -1,9 +1,9 @@
-import 'package:flutter_advanced_app/data/network/failure.dart';
+import '/data/network/failure.dart';
 import 'package:dartz/dartz.dart';
-import 'package:flutter_advanced_app/data/network/requests.dart';
-import 'package:flutter_advanced_app/data/usecase/base_use_case.dart';
-import 'package:flutter_advanced_app/domain/model/models.dart';
-import 'package:flutter_advanced_app/domain/repositroy/repository.dart';
+import '/data/network/requests.dart';
+import '/data/usecase/base_use_case.dart';
+import '/domain/model/models.dart';
+import '/domain/repositroy/repository.dart';
 
 class LoginUseCase implements BaseUseCase<LoginUseCaseInput, Authentication> {
   final Repositry _repositry;

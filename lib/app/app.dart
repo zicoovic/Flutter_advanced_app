@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_app/persentation/resources/routes_manager.dart';
-import 'package:flutter_advanced_app/persentation/resources/theme_manager.dart';
+
+import '../persentation/resources/routes_manager.dart';
+import '../persentation/resources/theme_manager.dart';
 
 class MyApp extends StatefulWidget {
   //named constructor

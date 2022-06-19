@@ -1,6 +1,6 @@
-import 'package:flutter_advanced_app/data/network/app_api.dart';
-import 'package:flutter_advanced_app/data/network/requests.dart';
-import 'package:flutter_advanced_app/data/response/responses.dart';
+import '/data/network/app_api.dart';
+import '/data/network/requests.dart';
+import '/data/response/responses.dart';
 
 abstract class RemoteDataSource {
   Future<AuthenticationResponse> login(LoginRequest loginRequest);
