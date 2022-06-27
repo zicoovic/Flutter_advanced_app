@@ -1,9 +1,10 @@
 import '/data/network/failure.dart';
 import 'package:dartz/dartz.dart';
 import '/data/network/requests.dart';
-import '/data/usecase/base_use_case.dart';
+
 import '/domain/model/models.dart';
 import '/domain/repositroy/repository.dart';
+import 'base_use_case.dart';
 
 class LoginUseCase implements BaseUseCase<LoginUseCaseInput, Authentication> {
   final Repositry _repositry;

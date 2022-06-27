@@ -1,3 +1,5 @@
+import 'package:advanced_flutter_arabic/app/app_prefs.dart';
+import 'package:advanced_flutter_arabic/app/di.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/domain/model/models.dart';
@@ -21,7 +23,9 @@ class OnBoardingView extends StatefulWidget {
 class _OnBoardingViewState extends State<OnBoardingView> {
   final PageController _pageController = PageController();
   final OnBoardingViewModel _viewModel = OnBoardingViewModel();
+  final AppPreferences _appPreferences = instance<AppPreferences>();
   _bind() {
+    _appPreferences.setOnBoardingScreenViewed();
     _viewModel.start();
   }
 

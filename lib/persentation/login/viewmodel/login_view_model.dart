@@ -4,8 +4,7 @@ import 'package:advanced_flutter_arabic/persentation/base/base_view_model.dart';
 import 'package:advanced_flutter_arabic/persentation/common/state_renderer/state_renderer.dart';
 import 'package:advanced_flutter_arabic/persentation/common/state_renderer/state_renderer_impl.dart';
 
-import '../../../data/usecase/login_use_case.dart';
-
+import '../../../domain/usecase/login_use_case.dart';
 import '../../common/freezed_data_classes.dart';
 
 class LoginViewModel extends BaseViewModel
@@ -18,6 +17,9 @@ class LoginViewModel extends BaseViewModel
   final StreamController _areAllInputsValidStreamController =
       StreamController<void>.broadcast();
 
+  final StreamController isUserLoggedInSuccessfullystreamController =
+      StreamController<bool>();
+
   var loginObject = LoginObject("", "");
   final LoginUseCase _loginUseCase;
 
@@ -29,6 +31,7 @@ class LoginViewModel extends BaseViewModel
     _userNameStreamController.close();
     _passwordStreamController.close();
     _areAllInputsValidStreamController.close();
+    isUserLoggedInSuccessfullystreamController.close();
     super.dispose();
   }
 
@@ -72,11 +75,13 @@ class LoginViewModel extends BaseViewModel
                   // left -> failure
                   inputState.add(ErrorState(
                       StateRendererType.popupErrorState, failure.message))
-                },
-            (data) => {
-                  // right -> data (success)
-                  inputState.add(ContentState()),
-                });
+                }, (data) {
+      // right -> data (success)
+      //content
+      inputState.add(ContentState());
+      // navigator to main screen
+      isUserLoggedInSuccessfullystreamController.add(true);
+    });
   }
 
   // outputs

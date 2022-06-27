@@ -1,4 +1,6 @@
+import 'package:advanced_flutter_arabic/app/app_prefs.dart';
 import 'package:advanced_flutter_arabic/persentation/common/state_renderer/state_renderer_impl.dart';
+import 'package:flutter/scheduler.dart';
 
 import '../../resources/color_manager.dart';
 import '../../resources/strings_manager.dart';
@@ -20,7 +22,7 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends State<LoginView> {
   final LoginViewModel _viewModel = instance<LoginViewModel>();
-
+  final AppPreferences _appPreferences = instance<AppPreferences>();
   final TextEditingController _userNameController = TextEditingController();
   final TextEditingController _userPasswordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -31,6 +33,16 @@ class _LoginViewState extends State<LoginView> {
         .addListener(() => _viewModel.setUserName(_userNameController.text));
     _userPasswordController.addListener(
         () => _viewModel.setPassword(_userPasswordController.text));
+
+    _viewModel.isUserLoggedInSuccessfullystreamController.stream
+        .listen((isLoggedIn) {
+      if (isLoggedIn) {
+        SchedulerBinding.instance.addPostFrameCallback((_) {
+          _appPreferences.setUserLoggedIn();
+          Navigator.of(context).pushReplacementNamed(Routes.mainRoute);
+        });
+      }
+    });
   }
 
   @override
@@ -133,14 +145,14 @@ class _LoginViewState extends State<LoginView> {
               Padding(
                   padding: const EdgeInsets.only(
                       top: AppPadding.p8,
-                      left: AppPadding.p28,
-                      right: AppPadding.p28),
+                      left: AppPadding.p12,
+                      right: AppPadding.p12),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
+                          Navigator.pushNamed(
                               context, Routes.forgotPasswordRoute);
                         },
                         child: Text(AppStrings.forgetPassword,
@@ -148,8 +160,7 @@ class _LoginViewState extends State<LoginView> {
                       ),
                       TextButton(
                         onPressed: () {
-                          Navigator.pushReplacementNamed(
-                              context, Routes.registerRoute);
+                          Navigator.pushNamed(context, Routes.registerRoute);
                         },
                         child: Text(AppStrings.register,
                             style: Theme.of(context).textTheme.titleMedium),
