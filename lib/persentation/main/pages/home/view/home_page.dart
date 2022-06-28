@@ -48,23 +48,19 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _getContentWidget() {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        _getBannersCarousel(),
-        _getSection(AppStrings.service),
-        _getservices(),
-        _getSection(AppStrings.store),
-        _getStores(),
-      ],
-    );
-  }
-
-  Widget _getBannersCarousel() {
-    return StreamBuilder<List<BannerAd>>(
-        stream: _viewModel.outputBanners,
+    return StreamBuilder<HomeViewObject>(
+        stream: _viewModel.outputHomeData,
         builder: (context, snapshot) {
-          return _getBannerWidget(snapshot.data);
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _getBannerWidget(snapshot.data?.banners),
+              _getSection(AppStrings.service),
+              _getServicesWidget(snapshot.data?.services),
+              _getSection(AppStrings.store),
+              _getStoresWidget(snapshot.data?.stores),
+            ],
+          );
         });
   }
 
@@ -117,14 +113,6 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget _getservices() {
-    return StreamBuilder<List<Service>>(
-        stream: _viewModel.outputServices,
-        builder: (context, snapshot) {
-          return _getServicesWidget(snapshot.data);
-        });
-  }
-
   Widget _getServicesWidget(List<Service>? services) {
     if (services != null) {
       return Padding(
@@ -141,7 +129,7 @@ class _HomePageState extends State<HomePage> {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(AppSize.s12),
                         side: BorderSide(
-                          color: ColorManager.primary,
+                          color: ColorManager.white,
                           width: AppSize.s1,
                         ),
                       ),
@@ -179,45 +167,39 @@ class _HomePageState extends State<HomePage> {
     }
   }
 
-  Widget _getStores() {
-    return StreamBuilder<List<Store>>(
-        stream: _viewModel.outputStores,
-        builder: (context, snapshot) {
-          return _getStoreWidget(snapshot.data);
-        });
-  }
-
-  Widget _getStoreWidget(List<Store>? store) {
-    if (store != null) {
+  Widget _getStoresWidget(List<Store>? stores) {
+    if (stores != null) {
       return Padding(
-          padding: const EdgeInsets.only(
-              left: AppPadding.p12, right: AppPadding.p12, top: AppPadding.p12),
-          child: Flex(
-            direction: Axis.vertical,
-            children: [
-              GridView.count(
-                  crossAxisCount: AppSize.s2,
-                  crossAxisSpacing: AppSize.s8,
-                  mainAxisSpacing: AppSize.s8,
-                  physics: const ScrollPhysics(),
-                  shrinkWrap: true,
-                  children: List.generate(store.length, (index) {
-                    return InkWell(
-                      onTap: () {
-                        Navigator.of(context)
-                            .pushNamed(Routes.storeDetialRoute);
-                      },
-                      child: Card(
-                        elevation: AppSize.s4,
-                        child: Image.network(
-                          store[index].image,
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    );
-                  }))
-            ],
-          ));
+        padding: const EdgeInsets.only(
+            left: AppPadding.p12, right: AppPadding.p12, top: AppPadding.p12),
+        child: Flex(
+          direction: Axis.vertical,
+          children: [
+            GridView.count(
+              crossAxisCount: AppSize.s2,
+              crossAxisSpacing: AppSize.s8,
+              mainAxisSpacing: AppSize.s8,
+              physics: const ScrollPhysics(),
+              shrinkWrap: true,
+              children: List.generate(stores.length, (index) {
+                return InkWell(
+                  onTap: () {
+                    // navigate to store details screen
+                    Navigator.of(context).pushNamed(Routes.storeDetialRoute);
+                  },
+                  child: Card(
+                    elevation: AppSize.s4,
+                    child: Image.network(
+                      stores[index].image,
+                      fit: BoxFit.cover,
+                    ),
+                  ),
+                );
+              }),
+            )
+          ],
+        ),
+      );
     } else {
       return Container();
     }
