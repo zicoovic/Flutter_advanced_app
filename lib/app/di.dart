@@ -1,4 +1,6 @@
+import 'package:advanced_flutter_arabic/domain/usecase/home_use_case.dart';
 import 'package:advanced_flutter_arabic/domain/usecase/register_use_case.dart';
+import 'package:advanced_flutter_arabic/persentation/main/pages/home/viewmodel/home_view_model.dart';
 import 'package:advanced_flutter_arabic/persentation/register/view_model/register_view_model.dart';
 import 'package:dio/dio.dart';
 import 'package:image_picker/image_picker.dart';
@@ -11,7 +13,6 @@ import '/data/network/app_api.dart';
 import '/data/network/dio_factory.dart';
 import '/data/network/network_info.dart';
 import '/data/repositroy/repositroy_impl.dart';
-
 import '/domain/repositroy/repository.dart';
 import '/persentation/login/viewmodel/login_view_model.dart';
 import 'package:get_it/get_it.dart';
@@ -77,5 +78,12 @@ initRegisterModule() {
         () => RegisterViewModel(instance()));
 
     instance.registerFactory<ImagePicker>(() => ImagePicker());
+  }
+}
+
+initHomeModule() {
+  if (!GetIt.I.isRegistered<HomeUseCase>()) {
+    instance.registerFactory<HomeUseCase>(() => HomeUseCase(instance()));
+    instance.registerFactory<HomeViewModel>(() => HomeViewModel(instance()));
   }
 }

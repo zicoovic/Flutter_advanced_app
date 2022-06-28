@@ -43,34 +43,28 @@ class StateRenderer extends StatelessWidget {
   Widget _getStateWidget(BuildContext context) {
     switch (stateRendererType) {
       case StateRendererType.popupLoadingState:
-        return _getPopUpDialog(context, [
-          _getAnimatedImage(JsonAssets.loading),
-        ]);
+        return _getPopUpDialog(
+            context, [_getAnimatedImage(JsonAssets.loading)]);
       case StateRendererType.popupErrorState:
         return _getPopUpDialog(context, [
           _getAnimatedImage(JsonAssets.error),
           _getMessage(message),
-          _getRetryButton(AppStrings.ok, context),
+          _getRetryButton(AppStrings.ok, context)
         ]);
       case StateRendererType.fullScreenLoadingState:
-        return _getItemsCloumn([
-          _getAnimatedImage(JsonAssets.loading),
-          _getMessage(message),
-          _getRetryButton(AppStrings.retryAgain, context),
-        ]);
+        return _getItemsCloumn(
+            [_getAnimatedImage(JsonAssets.loading), _getMessage(message)]);
       case StateRendererType.fullScreenErrorState:
         return _getItemsCloumn([
           _getAnimatedImage(JsonAssets.error),
           _getMessage(message),
+          _getRetryButton(AppStrings.retryAgain, context)
         ]);
       case StateRendererType.fullScreenEmptyState:
-        return _getItemsCloumn([
-          _getAnimatedImage(JsonAssets.empty),
-          _getMessage(message),
-        ]);
+        return _getItemsCloumn(
+            [_getAnimatedImage(JsonAssets.empty), _getMessage(message)]);
       case StateRendererType.contentState:
         return Container();
-
       case StateRendererType.popupSuccess:
         return _getPopUpDialog(context, [
           _getAnimatedImage(JsonAssets.success),
@@ -78,6 +72,8 @@ class StateRenderer extends StatelessWidget {
           _getMessage(message),
           _getRetryButton(AppStrings.ok, context)
         ]);
+      default:
+        return Container();
     }
   }
 

@@ -86,7 +86,7 @@ Map<String, dynamic> _$ForgotPasswordResponseToJson(
 
 ServiceResponse _$ServiceResponseFromJson(Map<String, dynamic> json) =>
     ServiceResponse(
-      json['id'] as String?,
+      json['id'] as int?,
       json['title'] as String?,
       json['image'] as String?,
     );
@@ -100,7 +100,7 @@ Map<String, dynamic> _$ServiceResponseToJson(ServiceResponse instance) =>
 
 BannersResponse _$BannersResponseFromJson(Map<String, dynamic> json) =>
     BannersResponse(
-      json['id'] as String?,
+      json['id'] as int?,
       json['title'] as String?,
       json['image'] as String?,
       json['link'] as String?,
@@ -116,7 +116,7 @@ Map<String, dynamic> _$BannersResponseToJson(BannersResponse instance) =>
 
 StoreResponse _$StoreResponseFromJson(Map<String, dynamic> json) =>
     StoreResponse(
-      json['id'] as String?,
+      json['id'] as int?,
       json['title'] as String?,
       json['image'] as String?,
     );
@@ -130,7 +130,7 @@ Map<String, dynamic> _$StoreResponseToJson(StoreResponse instance) =>
 
 HomeDataResponse _$HomeDataResponseFromJson(Map<String, dynamic> json) =>
     HomeDataResponse(
-      (json['servies'] as List<dynamic>?)
+      (json['services'] as List<dynamic>?)
           ?.map((e) => ServiceResponse.fromJson(e as Map<String, dynamic>))
           .toList(),
       (json['banners'] as List<dynamic>?)
@@ -143,9 +143,9 @@ HomeDataResponse _$HomeDataResponseFromJson(Map<String, dynamic> json) =>
 
 Map<String, dynamic> _$HomeDataResponseToJson(HomeDataResponse instance) =>
     <String, dynamic>{
-      'servies': instance.servies,
-      'banners': instance.bannaers,
-      'stores': instance.store,
+      'services': instance.services,
+      'banners': instance.banners,
+      'stores': instance.stores,
     };
 
 HomeResponse _$HomeResponseFromJson(Map<String, dynamic> json) => HomeResponse(

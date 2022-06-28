@@ -76,11 +76,13 @@ class ForgotPasswordResponse extends BaseResponse {
 
 @JsonSerializable()
 class ServiceResponse {
-  @JsonKey(name: "id")
-  String? id;
-  @JsonKey(name: "title")
+  @JsonKey(name: 'id')
+  int? id;
+
+  @JsonKey(name: 'title')
   String? title;
-  @JsonKey(name: "image")
+
+  @JsonKey(name: 'image')
   String? image;
 
   ServiceResponse(this.id, this.title, this.image);
@@ -95,13 +97,16 @@ class ServiceResponse {
 
 @JsonSerializable()
 class BannersResponse {
-  @JsonKey(name: "id")
-  String? id;
-  @JsonKey(name: "title")
+  @JsonKey(name: 'id')
+  int? id;
+
+  @JsonKey(name: 'title')
   String? title;
-  @JsonKey(name: "image")
+
+  @JsonKey(name: 'image')
   String? image;
-  @JsonKey(name: "link")
+
+  @JsonKey(name: 'link')
   String? link;
 
   BannersResponse(this.id, this.title, this.image, this.link);
@@ -116,11 +121,13 @@ class BannersResponse {
 
 @JsonSerializable()
 class StoreResponse {
-  @JsonKey(name: "id")
-  String? id;
-  @JsonKey(name: "title")
+  @JsonKey(name: 'id')
+  int? id;
+
+  @JsonKey(name: 'title')
   String? title;
-  @JsonKey(name: "image")
+
+  @JsonKey(name: 'image')
   String? image;
 
   StoreResponse(this.id, this.title, this.image);
@@ -135,14 +142,16 @@ class StoreResponse {
 
 @JsonSerializable()
 class HomeDataResponse {
-  @JsonKey(name: "servies")
-  List<ServiceResponse>? servies;
-  @JsonKey(name: "banners")
-  List<BannersResponse>? bannaers;
-  @JsonKey(name: "stores")
-  List<StoreResponse>? store;
+  @JsonKey(name: 'services')
+  List<ServiceResponse>? services;
 
-  HomeDataResponse(this.servies, this.bannaers, this.store);
+  @JsonKey(name: 'banners')
+  List<BannersResponse>? banners;
+
+  @JsonKey(name: 'stores')
+  List<StoreResponse>? stores;
+
+  HomeDataResponse(this.services, this.banners, this.stores);
 
   // toJson
   Map<String, dynamic> toJson() => _$HomeDataResponseToJson(this);
@@ -154,7 +163,7 @@ class HomeDataResponse {
 
 @JsonSerializable()
 class HomeResponse extends BaseResponse {
-  @JsonKey(name: "data")
+  @JsonKey(name: 'data')
   HomeDataResponse? data;
 
   HomeResponse(this.data);

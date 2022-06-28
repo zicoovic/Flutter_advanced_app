@@ -41,7 +41,7 @@ extension ForgotPasswordResponseMapper on ForgotPasswordResponse? {
 extension ServiesResponseMapper on ServiceResponse {
   Service toDomain() {
     return Service(
-      id.orEmpty(),
+      id.orZero(),
       title.orEmpty(),
       image.orEmpty(),
     );
@@ -51,7 +51,7 @@ extension ServiesResponseMapper on ServiceResponse {
 extension StoreResponseMapper on StoreResponse {
   Store toDomain() {
     return Store(
-      id.orEmpty(),
+      id.orZero(),
       title.orEmpty(),
       image.orEmpty(),
     );
@@ -61,7 +61,7 @@ extension StoreResponseMapper on StoreResponse {
 extension BannerResponseMapper on BannersResponse {
   BannerAd toDomain() {
     return BannerAd(
-      id.orEmpty(),
+      id.orZero(),
       title.orEmpty(),
       image.orEmpty(),
       link.orEmpty(),
@@ -73,22 +73,24 @@ extension HomeResponseMapper on HomeResponse? {
   HomeObject toDomain() {
     List<Service> services = (this
                 ?.data
-                ?.servies
+                ?.services
                 ?.map((serviceResponse) => serviceResponse.toDomain()) ??
             const Iterable.empty())
         .cast<Service>()
         .toList();
+
     List<BannerAd> banners = (this
                 ?.data
-                ?.servies
-                ?.map((bannerResponse) => bannerResponse.toDomain()) ??
+                ?.banners
+                ?.map((bannersResponse) => bannersResponse.toDomain()) ??
             const Iterable.empty())
         .cast<BannerAd>()
         .toList();
+
     List<Store> stores = (this
                 ?.data
-                ?.servies
-                ?.map((storeResponse) => storeResponse.toDomain()) ??
+                ?.stores
+                ?.map((storesResponse) => storesResponse.toDomain()) ??
             const Iterable.empty())
         .cast<Store>()
         .toList();

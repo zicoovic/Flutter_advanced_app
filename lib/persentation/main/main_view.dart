@@ -1,7 +1,7 @@
-import 'package:advanced_flutter_arabic/persentation/main/pages/home_page.dart';
-import 'package:advanced_flutter_arabic/persentation/main/pages/notofiction_page.dart';
-import 'package:advanced_flutter_arabic/persentation/main/pages/search_page.dart';
-import 'package:advanced_flutter_arabic/persentation/main/pages/settings_page.dart';
+import 'package:advanced_flutter_arabic/persentation/main/pages/home/view/home_page.dart';
+import 'package:advanced_flutter_arabic/persentation/main/pages/notofiction/notofiction_page.dart';
+import 'package:advanced_flutter_arabic/persentation/main/pages/search/search_page.dart';
+import 'package:advanced_flutter_arabic/persentation/main/pages/settings/settings_page.dart';
 import 'package:advanced_flutter_arabic/persentation/resources/color_manager.dart';
 import 'package:advanced_flutter_arabic/persentation/resources/strings_manager.dart';
 import 'package:advanced_flutter_arabic/persentation/resources/values_manager.dart';
