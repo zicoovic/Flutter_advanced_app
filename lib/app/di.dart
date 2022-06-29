@@ -1,3 +1,4 @@
+import 'package:advanced_flutter_arabic/data/data_source/local_data_source.dart';
 import 'package:advanced_flutter_arabic/domain/usecase/home_use_case.dart';
 import 'package:advanced_flutter_arabic/domain/usecase/register_use_case.dart';
 import 'package:advanced_flutter_arabic/persentation/main/pages/home/viewmodel/home_view_model.dart';
@@ -47,11 +48,13 @@ Future<void> initAppModule() async {
   // remote data source
   instance.registerLazySingleton<RemoteDataSource>(
       () => RemoteDataSourceImpl(instance<AppServiceClient>()));
+  // local data source
+  instance.registerLazySingleton<LocalDataSource>(() => LocalDataSourceImpl());
 
   // repository
 
   instance.registerLazySingleton<Repositry>(
-      () => RepositroyImpl(instance(), instance()));
+      () => RepositroyImpl(instance(), instance(), instance()));
 }
 
 initLoginModule() {

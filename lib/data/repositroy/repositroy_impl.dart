@@ -1,3 +1,5 @@
+import 'package:advanced_flutter_arabic/data/data_source/local_data_source.dart';
+
 import '/data/data_source/remote_data_source.dart';
 import '/data/mapper/mapper.dart';
 import '/data/network/error_handler.dart';
@@ -10,8 +12,10 @@ import '/domain/repositroy/repository.dart';
 
 class RepositroyImpl implements Repositry {
   final RemoteDataSource _remoteDataSource;
+  final LocalDataSource _localDataSource;
   final NetworkInfo _networkInfo;
-  RepositroyImpl(this._remoteDataSource, this._networkInfo);
+  RepositroyImpl(
+      this._remoteDataSource, this._networkInfo, this._localDataSource);
   @override
   Future<Either<Failure, Authentication>> login(
       LoginRequest loginRequest) async {
@@ -89,28 +93,38 @@ class RepositroyImpl implements Repositry {
 
   @override
   Future<Either<Failure, HomeObject>> getHomeData() async {
-    if (await _networkInfo.isConnected) {
-      try {
-        // its safe to call API
-        final response = await _remoteDataSource.getHomeData();
+    try {
+      //get Response from Cache
 
-        if (response.status == ApiInternalStatus.success) {
-          // success
-          // return right
-          return Right(response.toDomain());
-        } else {
-          // failure
-          // return left
-          return Left(Failure(response.status ?? ResponseCode.DEFUALT,
-              response.message ?? ResponseMessage.DEFUALT));
+      final response = await _localDataSource.getHomeData();
+      return right(response.toDomain());
+    } catch (cacheError) {
+      // cache is existing or cache is not valid
+
+      if (await _networkInfo.isConnected) {
+        try {
+          // its safe to call API
+          final response = await _remoteDataSource.getHomeData();
+
+          if (response.status == ApiInternalStatus.success) {
+            // success
+            // return right
+            _localDataSource.saveHomeToCache(response);
+            return Right(response.toDomain());
+          } else {
+            // failure
+            // return left
+            return Left(Failure(response.status ?? ResponseCode.DEFUALT,
+                response.message ?? ResponseMessage.DEFUALT));
+          }
+        } catch (error) {
+          return Left(ErrorHandler.handle(error).failure);
         }
-      } catch (error) {
-        return Left(ErrorHandler.handle(error).failure);
+      } else {
+        // return network connection error
+        // return left
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
-    } else {
-      // return network connection error
-      // return left
-      return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
     }
   }
 }
