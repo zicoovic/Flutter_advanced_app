@@ -23,13 +23,13 @@ class RepositroyImpl implements Repositry {
       // it's connected to internet, it's safe to call API
       try {
         final response = await _remoteDataSource.login(loginRequest);
-        if (response.status == ApiInternalStatus.success) {
+        if (response.status == ApiInternalStatus.SUCCESS) {
           // success
           return right(response.toDomain());
         } else {
           // failure -- business error
-          return left(Failure(ApiInternalStatus.failure,
-              response.message ?? ResponseMessage.DEFUALT));
+          return left(Failure(ApiInternalStatus.FAILURE,
+              response.message ?? ResponseMessage.DEFAULT));
         }
       } catch (error) {
         return left(ErrorHandler.handle(error).failure);
@@ -47,15 +47,15 @@ class RepositroyImpl implements Repositry {
         // its safe to call API
         final response = await _remoteDataSource.forgotPassword(email);
 
-        if (response.status == ApiInternalStatus.success) {
+        if (response.status == ApiInternalStatus.SUCCESS) {
           // success
           // return right
           return Right(response.toDomain());
         } else {
           // failure
           // return left
-          return Left(Failure(response.status ?? ResponseCode.DEFUALT,
-              response.message ?? ResponseMessage.DEFUALT));
+          return Left(Failure(response.status ?? ResponseCode.DEFAULT,
+              response.message ?? ResponseMessage.DEFAULT));
         }
       } catch (error) {
         return Left(ErrorHandler.handle(error).failure);
@@ -74,13 +74,13 @@ class RepositroyImpl implements Repositry {
       // it's connected to internet, it's safe to call API
       try {
         final response = await _remoteDataSource.register(registerRequest);
-        if (response.status == ApiInternalStatus.success) {
+        if (response.status == ApiInternalStatus.SUCCESS) {
           // success
           return right(response.toDomain());
         } else {
           // failure -- business error
-          return left(Failure(ApiInternalStatus.failure,
-              response.message ?? ResponseMessage.DEFUALT));
+          return left(Failure(ApiInternalStatus.FAILURE,
+              response.message ?? ResponseMessage.DEFAULT));
         }
       } catch (error) {
         return left(ErrorHandler.handle(error).failure);
@@ -106,7 +106,7 @@ class RepositroyImpl implements Repositry {
           // its safe to call API
           final response = await _remoteDataSource.getHomeData();
 
-          if (response.status == ApiInternalStatus.success) {
+          if (response.status == ApiInternalStatus.SUCCESS) {
             // success
             // return right
             _localDataSource.saveHomeToCache(response);
@@ -114,8 +114,8 @@ class RepositroyImpl implements Repositry {
           } else {
             // failure
             // return left
-            return Left(Failure(response.status ?? ResponseCode.DEFUALT,
-                response.message ?? ResponseMessage.DEFUALT));
+            return Left(Failure(response.status ?? ResponseCode.DEFAULT,
+                response.message ?? ResponseMessage.DEFAULT));
           }
         } catch (error) {
           return Left(ErrorHandler.handle(error).failure);
@@ -123,6 +123,33 @@ class RepositroyImpl implements Repositry {
       } else {
         // return network connection error
         // return left
+        return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
+      }
+    }
+  }
+
+  @override
+  Future<Either<Failure, StoreDetails>> getStoreDetails() async {
+    try {
+      // get data from cache
+
+      final response = await _localDataSource.getStoreDetails();
+      return Right(response.toDomain());
+    } catch (cacheError) {
+      if (await _networkInfo.isConnected) {
+        try {
+          final response = await _remoteDataSource.getStoreDetails();
+          if (response.status == ApiInternalStatus.SUCCESS) {
+            _localDataSource.saveStoreDetailsToCache(response);
+            return Right(response.toDomain());
+          } else {
+            return Left(Failure(response.status ?? ResponseCode.DEFAULT,
+                response.message ?? ResponseMessage.DEFAULT));
+          }
+        } catch (error) {
+          return Left(ErrorHandler.handle(error).failure);
+        }
+      } else {
         return Left(DataSource.NO_INTERNET_CONNECTION.getFailure());
       }
     }

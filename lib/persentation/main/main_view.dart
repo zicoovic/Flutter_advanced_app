@@ -5,6 +5,7 @@ import 'package:advanced_flutter_arabic/persentation/main/pages/settings/setting
 import 'package:advanced_flutter_arabic/persentation/resources/color_manager.dart';
 import 'package:advanced_flutter_arabic/persentation/resources/strings_manager.dart';
 import 'package:advanced_flutter_arabic/persentation/resources/values_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 class MainView extends StatefulWidget {
@@ -22,10 +23,10 @@ class _MainViewState extends State<MainView> {
     SettingsPage(),
   ];
   List<String> titles = [
-    AppStrings.home,
-    AppStrings.search,
-    AppStrings.notification,
-    AppStrings.settings
+    AppStrings.home.tr(),
+    AppStrings.search.tr(),
+    AppStrings.notifications.tr(),
+    AppStrings.settings.tr()
   ];
 
   var _title = AppStrings.home;
@@ -53,16 +54,17 @@ class _MainViewState extends State<MainView> {
           unselectedItemColor: ColorManager.grey,
           currentIndex: _currentIndex,
           onTap: onTap,
-          items: const [
+          items: [
             BottomNavigationBarItem(
-                icon: Icon(Icons.home), label: AppStrings.home),
+                icon: const Icon(Icons.home), label: AppStrings.home.tr()),
             BottomNavigationBarItem(
-                icon: Icon(Icons.search), label: AppStrings.search),
+                icon: const Icon(Icons.search), label: AppStrings.search.tr()),
             BottomNavigationBarItem(
-                icon: Icon(Icons.notifications),
-                label: AppStrings.notification),
+                icon: const Icon(Icons.notifications),
+                label: AppStrings.notifications.tr()),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings), label: AppStrings.settings),
+                icon: const Icon(Icons.settings),
+                label: AppStrings.settings.tr()),
           ],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:advanced_flutter_arabic/app/constants.dart';
 import 'package:advanced_flutter_arabic/persentation/common/state_renderer/state_renderer.dart';
 import 'package:advanced_flutter_arabic/persentation/resources/strings_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 
 abstract class FlowState {
@@ -18,7 +19,7 @@ class LoadingState extends FlowState {
       {required this.stateRendererType, String messge = AppStrings.loading});
 
   @override
-  String getMessage() => message ?? AppStrings.loading;
+  String getMessage() => message ?? AppStrings.loading.tr();
 
   @override
   StateRendererType getStateRendererType() => stateRendererType;

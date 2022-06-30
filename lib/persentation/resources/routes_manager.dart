@@ -1,4 +1,5 @@
 import 'package:advanced_flutter_arabic/persentation/forget_password/forget_password.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import '/persentation/on_boarding/view/on_boarding_view.dart';
 
@@ -41,6 +42,7 @@ class RouteGenerator {
         initHomeModule();
         return MaterialPageRoute(builder: (_) => const MainView());
       case Routes.storeDetialRoute:
+        initStoreDetailsModule();
         return MaterialPageRoute(builder: (_) => const StoreDetailsView());
       default:
         return unDefinedRoute();
@@ -51,9 +53,9 @@ class RouteGenerator {
     return MaterialPageRoute(
         builder: (_) => Scaffold(
               appBar: AppBar(
-                title: const Text(AppStrings.noRouteFound),
+                title: const Text(AppStrings.noRouteFound).tr(),
               ),
-              body: const Center(child: Text(AppStrings.noRouteFound)),
+              body: Center(child: Text(AppStrings.noRouteFound.tr())),
             ));
   }
 }

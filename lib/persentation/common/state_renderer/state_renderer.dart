@@ -6,6 +6,7 @@ import 'package:advanced_flutter_arabic/persentation/resources/font_manager.dart
 import 'package:advanced_flutter_arabic/persentation/resources/strings_manager.dart';
 import 'package:advanced_flutter_arabic/persentation/resources/styles_manager.dart';
 import 'package:advanced_flutter_arabic/persentation/resources/values_manager.dart';
+import 'package:easy_localization/easy_localization.dart';
 import "package:flutter/material.dart";
 import 'package:lottie/lottie.dart';
 
@@ -49,7 +50,7 @@ class StateRenderer extends StatelessWidget {
         return _getPopUpDialog(context, [
           _getAnimatedImage(JsonAssets.error),
           _getMessage(message),
-          _getRetryButton(AppStrings.ok, context)
+          _getRetryButton(AppStrings.ok.tr(), context)
         ]);
       case StateRendererType.fullScreenLoadingState:
         return _getItemsCloumn(
@@ -58,7 +59,7 @@ class StateRenderer extends StatelessWidget {
         return _getItemsCloumn([
           _getAnimatedImage(JsonAssets.error),
           _getMessage(message),
-          _getRetryButton(AppStrings.retryAgain, context)
+          _getRetryButton(AppStrings.retryAgain.tr(), context)
         ]);
       case StateRendererType.fullScreenEmptyState:
         return _getItemsCloumn(
@@ -70,7 +71,7 @@ class StateRenderer extends StatelessWidget {
           _getAnimatedImage(JsonAssets.success),
           _getMessage(title),
           _getMessage(message),
-          _getRetryButton(AppStrings.ok, context)
+          _getRetryButton(AppStrings.ok.tr(), context)
         ]);
       default:
         return Container();

@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'package:easy_localization/easy_localization.dart';
+
 import '/domain/model/models.dart';
 import '/persentation/base/base_view_model.dart';
 import '/persentation/resources/assets_manager.dart';
@@ -66,14 +68,14 @@ class OnBoardingViewModel extends BaseViewModel
   }
 
   List<SliderObject> _getSliderData() => [
-        SliderObject(AppStrings.onBoardingTitle1,
-            AppStrings.onBoardingSubTitle1, ImageAssets.onboardingLogo1),
-        SliderObject(AppStrings.onBoardingTitle2,
-            AppStrings.onBoardingSubTitle2, ImageAssets.onboardingLogo2),
-        SliderObject(AppStrings.onBoardingTitle3,
-            AppStrings.onBoardingSubTitle3, ImageAssets.onboardingLogo3),
-        SliderObject(AppStrings.onBoardingTitle4,
-            AppStrings.onBoardingSubTitle4, ImageAssets.onboardingLogo4),
+        SliderObject(AppStrings.onBoardingTitle1.tr(),
+            AppStrings.onBoardingSubTitle1.tr(), ImageAssets.onboardingLogo1),
+        SliderObject(AppStrings.onBoardingTitle2.tr(),
+            AppStrings.onBoardingSubTitle2.tr(), ImageAssets.onboardingLogo2),
+        SliderObject(AppStrings.onBoardingTitle3.tr(),
+            AppStrings.onBoardingSubTitle3.tr(), ImageAssets.onboardingLogo3),
+        SliderObject(AppStrings.onBoardingTitle4.tr(),
+            AppStrings.onBoardingSubTitle4.tr(), ImageAssets.onboardingLogo4),
       ];
 }
 

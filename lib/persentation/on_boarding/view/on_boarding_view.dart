@@ -1,5 +1,6 @@
 import 'package:advanced_flutter_arabic/app/app_prefs.dart';
 import 'package:advanced_flutter_arabic/app/di.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '/domain/model/models.dart';
@@ -79,7 +80,7 @@ class _OnBoardingViewState extends State<OnBoardingView> {
                     Navigator.pushReplacementNamed(context, Routes.loginRoute);
                   },
                   child: Text(
-                    AppStrings.skip,
+                    AppStrings.skip.tr(),
                     style: Theme.of(context).textTheme.titleMedium,
                     textAlign: TextAlign.end,
                   ),
